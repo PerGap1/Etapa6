@@ -1,0 +1,53 @@
+.corPrimaria {
+    background-color: blueviolet;
+}
+
+.corSecundaria {
+    background-color: rgb(54, 53, 58);
+}
+
+.corTerciaria {
+    background-color: rgb(93, 91, 99);
+}
+
+.corClara {
+    background-color: rgb(167, 167, 167);
+}
+
+.corFundo {
+    background-color: rgb(47, 40, 58);
+}
+
+.titulo {
+    color: blueviolet; 
+    font: bold; 
+    font-family: helvetica;
+}
+
+.corFonte {
+    color: white;
+    font-size: xx-large;
+}
+
+
+
+.tabua {
+    border-radius: 15px;
+    background-color: rgb(54, 53, 58);
+}
+
+.centralizado {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+.tabela {
+    height: 100%; 
+    border: 1px solid black;
+}
+
+.botao {
+    background-color: blueviolet;
+    border-color: blueviolet;
+}

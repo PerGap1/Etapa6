@@ -1,0 +1,5 @@
+com\ogsbreakout\etapa7\Etapa7Application.class
+com\ogsbreakout\etapa7\controller\MainController.class
+com\ogsbreakout\etapa7\controller\ErroController.class
+com\ogsbreakout\etapa7\JakartaRestConfiguration.class
+com\ogsbreakout\etapa7\resources\JakartaEE8Resource.class
