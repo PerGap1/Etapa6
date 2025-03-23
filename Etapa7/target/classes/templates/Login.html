@@ -18,61 +18,38 @@
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
                     <h1 class="titulo title">Login</h1>
                 </header>
-                <form style="text-align: left;">
+                
+                <div th:if="${erroAutenticacao}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroAutenticacao}"></p>
+                </div>
+
+                <form action="/Usuario/Entrar" method="POST" style="text-align: left;">
                     <div class="mb-3">
-                        <label for="username" class="form-label text-white">Nome de usuário:</label>
-                        <input type="text" id="username" class="form-control">
+                        <label for="username" class="form-label text-white" >Nome de usuário:</label>
+                        <input type="text" id="username" name="nome" class="form-control" th:value="${nome}">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label text-white">Senha:</label>
-                        <input type="password" id="password" class="form-control">
+                        <input type="password" id="password" name="senha" class="form-control" th:value="${senha}">
                     </div>
 
                     <div class="row">
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/NovaConta" type="button" class="btn btn-secondary w-50 ml-5">Criar conta</a>
+                            <a th:href="@{/NovaConta}" type="button" class="btn btn-secondary w-50 ml-5">Criar conta</a>
                         </div>
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/Catalogo" type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" 
-                               style="border-color: blueviolet;" onclick="return validarFormulario(event);">Entrar</a>
+                            <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" 
+                                    style="border-color: blueviolet;"> Entrar</Button> 
                         </div>
 
                         <div class="col-12 centralizado">
-                            <a href="/" class="text-primary" style="color: blueviolet;">Cancelar</a>
+                            <a th:href="@{/}" class="text-primary" style="color: blueviolet;">Cancelar</a>
                             <a>|</a>
-                            <a href="/EsqueciSenha" class="text-muted">Esqueceu a senha?</a>
+                            <a th:href="@{/EsqueciSenha}" class="text-muted">Esqueceu a senha?</a>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        
-        <script>
-            function validarFormulario(event) {
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
-
-                if (username !== "" && password !== "") {
-                    return true;
-                }
-
-                else if (username === "" && password === ""){
-                    alert("Por favor, insira nome de usuário e senha");
-                }
-                
-                else if (password === ""){
-                    alert("Por favor, insira a senha");
-                }
-
-                else{
-                    alert("Por favor, insira o nome de usuário");
-                }
-                
-                event.preventDefault();
-                return false;
-            }
-
-            document.querySelector('form').addEventListener('submit', validarFormulario);
-        </script>
     </body>
 </html>

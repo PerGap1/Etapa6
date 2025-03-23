@@ -14,13 +14,13 @@
         <header>
             <nav class="corPrimaria centralizado row"> 
                 <div class="col-4 p-2" style="max-height: 50%;">
-                    <a href="/Catalogo" class="corFonte" style="font-weight: bold;">Catálogo</a> 
+                    <a th:href="@{/Catalogo}" class="corFonte" style="font-weight: bold;">Catálogo</a> 
                 </div>
                 <div class="col-4 p-2" style="max-height: 50%;">
-                    <a href="/MeusJogos" class="corFonte">Meus jogos</a> 
+                    <a th:href="@{/MeusJogos}" class="corFonte">Meus jogos</a> 
                 </div>
                 <div class="col-4 p-2" style="max-height: 50%;">
-                    <a href="/Conta" class="corFonte">Conta</a> 
+                    <a th:href="@{/Conta}" class="corFonte">Conta</a> 
                 </div>
             </nav> 
         </header>
@@ -28,11 +28,11 @@
         <img src="/images/LOGO.png" alt="logo" class="img-fluid" style="max-width: 8%;">
 
         <div class="container my-2 corSecundaria p-2">
-            <form class="centralizado" role="search">
+            <form action="/Catalogo" method="GET" class="centralizado" role="search">
                 <div class="row">
                     <div class="col-2"></div>
                     <div class="col-4">
-                        <input class="form-control me-2 w-100" type="search" placeholder="Pesquisar jogo">
+                        <input class="form-control me-2 w-100" type="search" id="filtro" name="filtro" placeholder="Pesquisar jogo" th:value="${filtro}">
                     </div>
                     <div class="col-1"></div>
                     <div class="col-3">
@@ -47,25 +47,26 @@
             <table class="tabela table table-striped table-responsive-md h-100" style="background-color: white; min-height: 20vw;">
                 <thead>
                     <tr>
-                        <th>Imagem</th>
+                        <th>Título</th>
                         <th>Categoria</th>
                         <th>Valor</th>
                         <th>Lançamento</th>
                         <th>Criador</th>
+                        <!-- SOLICITAR IDADE AO ENTRAR NO JOGO -->
                         <th>Possue</th>
                         <th>Ver mais</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="jogo : ${listarJogos}">
-                        <td th:text="${jogo.imagem}"></td>
+                        <td th:text="${jogo.titulo}"></td>
                         <td th:text="${jogo.categoria}"></td>
-                        <td th:text="${jogo.valor}"></td>
-                        <td th:text="${jogo.lançamento}"></td>
+                        <td th:text="'R$ ' + ${#numbers.formatDecimal(jogo.valor, 1, 2, 'COMMA')}"></td>
+                        <td th:text="${#temporals.format(jogo.lancamento, 'dd/MM/yyyy')}"></td>
                         <td th:text="${jogo.criador}"></td>
-                        <td th:text="${jogo.possue}"></td>
+                        <td th:text="${listaUsuarioJogos[jogo.id - 1].possui ? 'Sim' : 'Não'}"></td>
                         <td>
-                            <a th:href="@{/jogos/detalhes/{id}}(id=${jogo.id})" class="btn btn-primary">Detalhes</a>
+                            <a th:href="@{/Jogo/Detalhes/{id}(id=${jogo.id})}" class="btn btn-primary">Detalhes</a>
                         </td>
                     </tr>
                 </tbody>

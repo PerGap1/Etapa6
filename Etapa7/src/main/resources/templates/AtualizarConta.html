@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Atualizar conta</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+        crossorigin="anonymous">
+        
+        <link rel="stylesheet" th:href="@{/css/cores.css}">
+    </head>
+
+    <body class="centralizado corFundo">
+        <img src="/images/LOGO.png" alt="logo" class="img-fluid" style="max-width: 10%;">
+
+        <div class="container centralizado d-flex vh-100">
+            <div class="login-box w-75 shadow-lg p-4 tabua">
+                <header class="row text-light h-20 centralizado" style="text-align: center;">
+                    <h1 class="titulo title">Atualizar conta</h1>
+                </header>
+                
+                <div th:if="${erroInvalidade}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroInvalidade}"></p>
+                </div>
+                <div th:if="${erroNome}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroNome}"></p>
+                </div>
+                <div th:if="${erroApelido}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroApelido}"></p>
+                </div>
+                <div th:if="${erroEmail}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroEmail}"></p>
+                </div>
+                <div th:if="${erroIdade}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroIdade}"></p>
+                </div>
+                <!-- /Usuario para post -->
+                <form th:action="@{/Usuario/AtualizarConta}" method="POST" style="text-align: left; align-items: center; font-size: large;">
+                    <div class="mb-3 my-4">
+                        <div class="row">
+                            <div class="col-3" style="padding-top: 0.5%;">
+                                <label for="nome" class="form-label text-white">Nome de usuário:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" id="nome" name="nome" class="form-control" th:value="${usuarioNovo.nome}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 my-4">
+                        <div class="row">
+                            <div class="col-3" style="padding-top: 0.5%;">
+                                <label for="senha" class="form-label text-white">Senha:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="password" id="senha" name="senha" class="form-control" th:value="${usuarioNovo.senha}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 my-4">
+                        <div class="row">
+                            <div class="col-3" style="padding-top: 0.5%;">
+                                <label for="email" class="form-label text-white">Email:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" id="email" name="email" class="form-control" th:value="${usuarioNovo.email}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 my-4">
+                        <div class="row">
+                            <div class="col-3" style="padding-top: 0.5%;">
+                                <label for="apelido" class="form-label text-white">Apelido:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="text" id="apelido" name="apelido" class="form-control" th:value="${usuarioNovo.apelido}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 my-4">
+                        <div class="row">
+                            <div class="col-3" style="padding-top: 0.5%;">
+                                <label for="idade" class="form-label text-white">Idade:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="number" id="idade" name="idade" class="form-control" th:value="${usuarioNovo.idade}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-3 col-md-6 centralizado d-flex">
+                            <a th:href="@{/Conta}" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
+                        </div>
+                        <div class="col-3 col-md-6 centralizado d-flex">
+                            <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" 
+                               style="border-color: blueviolet;">Atualizar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

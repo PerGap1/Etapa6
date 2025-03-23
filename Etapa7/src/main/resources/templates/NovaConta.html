@@ -7,7 +7,7 @@
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
         crossorigin="anonymous">
         
-        <link rel="stylesheet" href="/css/cores.css">
+        <link rel="stylesheet" th:href="@{/css/cores.css}">
     </head>
 
     <body class="centralizado corFundo">
@@ -18,24 +18,41 @@
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
                     <h1 class="titulo title">Nova conta</h1>
                 </header>
-                <form style="text-align: left; align-items: center; font-size: large;">
+                
+                <div th:if="${erroInvalidade}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroInvalidade}"></p>
+                </div>
+                <div th:if="${erroNome}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroNome}"></p>
+                </div>
+                <div th:if="${erroApelido}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroApelido}"></p>
+                </div>
+                <div th:if="${erroEmail}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroEmail}"></p>
+                </div>
+                <div th:if="${erroIdade}" class="corSecundaria text-center" style="color: crimson">
+                    <p th:text="${erroIdade}"></p>
+                </div>
+                
+                <form th:action="@{/Usuario/CriarConta}" method="POST" style="text-align: left; align-items: center; font-size: large;">
                     <div class="mb-3 my-4">
                         <div class="row">
                             <div class="col-3" style="padding-top: 0.5%;">
-                                <label for="username" class="form-label text-white">Nome de usuário:</label>
+                                <label for="nome" class="form-label text-white">Nome de usuário:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="username" class="form-control">
+                                <input type="text" id="nome" name="nome" class="form-control" th:value="${usuario.nome}">
                             </div>
                         </div>
                     </div>
                     <div class="mb-3 my-4">
                         <div class="row">
                             <div class="col-3" style="padding-top: 0.5%;">
-                                <label for="password" class="form-label text-white">Senha:</label>
+                                <label for="senha" class="form-label text-white">Senha:</label>
                             </div>
                             <div class="col-9">
-                                <input type="password" id="password" class="form-control">
+                                <input type="password" id="senha" name="senha" class="form-control" th:value="${usuario.senha}">
                             </div>
                         </div>
                     </div>
@@ -45,7 +62,7 @@
                                 <label for="email" class="form-label text-white">Email:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="email" class="form-control">
+                                <input type="text" id="email" name="email" class="form-control" th:value="${usuario.email}">
                             </div>
                         </div>
                     </div>
@@ -55,56 +72,32 @@
                                 <label for="apelido" class="form-label text-white">Apelido:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="nickname" class="form-control">
+                                <input type="text" id="apelido" name="apelido" class="form-control" th:value="${usuario.apelido}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 my-4">
+                        <div class="row">
+                            <div class="col-3" style="padding-top: 0.5%;">
+                                <label for="idade" class="form-label text-white">Idade:</label>
+                            </div>
+                            <div class="col-9">
+                                <input type="number" id="idade" name="idade" class="form-control" th:value="${usuario.idade}">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/Login" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
+                            <a th:href="@{/Login}" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
                         </div>
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/Catalogo" type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" 
-                               style="border-color: blueviolet;" onclick="return validarFormulario(event);">Criar</a>
+                            <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" 
+                               style="border-color: blueviolet;">Criar</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        
-        <script>
-            function validarFormulario(event) {
-                var username = document.getElementById('username').value;
-                var password = document.getElementById('password').value;
-                var email = document.getElementById('email').value;
-                var nickname = document.getElementById('nickname').value;
-
-                if (username !== "" && password !== "" && email !== "" && nickname !== "") {
-                    return true;
-                }
-
-                else if (username === ""){
-                    alert("Por favor, insira o nome de usuário");
-                }
-                
-                else if (password === ""){
-                    alert("Por favor, insira a senha");
-                }
-
-                else if (email === ""){
-                    alert("Por favor, insira o email");
-                }
-                
-                else {
-                    alert("Por favor, insira o apelido");
-                }
-
-                event.preventDefault();
-                return false;
-            }
-
-            document.querySelector('form').addEventListener('submit', validarFormulario);
-        </script>
     </body>
 </html>

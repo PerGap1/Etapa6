@@ -12,38 +12,43 @@
 
     <body class="corFundo centralizado">
         <header>
-            <nav class="corPrimaria centralizado row"> 
-                <div class="col-4 p-2" style="max-height: 50%;">
-                    <a href="/Catalogo" class="corFonte">Catálogo</a> 
+            <nav class="corPrimaria centralizado row text-center"> 
+                <div class="col-4 p-2">
+                    <a th:href="@{/Catalogo}" class="corFonte">Catálogo</a> 
                 </div>
-                <div class="col-4 p-2" style="max-height: 50%;">
-                    <a href="/MeusJogos" class="corFonte">Meus jogos</a> 
+                <div class="col-4 p-2">
+                    <a th:href="@{/MeusJogos}" class="corFonte">Meus jogos</a> 
                 </div>
-                <div class="col-4 p-2" style="max-height: 50%;">
-                    <a href="/Conta" class="corFonte" style="font-weight: bold;">Conta</a> 
+                <div class="col-4 p-2">
+                    <a th:href="@{/Conta}" class="corFonte font-weight-bold">Conta</a> 
                 </div>
             </nav> 
         </header>
 
-        <div class="container corSecundaria p-4 centralizado" style="margin-top: 1vw;">
+        <div class="container corSecundaria p-4 centralizado mt-3">
             <div class="row" style="min-height: 35vw;">
-                <div class="col-3 p-2 corTerciaria" style="border: 1px solid black;">
-                    <button class="btn btn-secondary w-75 my-2 corTerciaria" style="border-color: rgb(93, 91, 99);">Atualizar conta</button>
-                    <button class="btn btn-secondary w-75 my-2 corTerciaria" style="border-color: rgb(93, 91, 99);;">Meu carrinho</button>
-                    <button class="btn btn-secondary w-75 my-2 corTerciaria" style="border-color: rgb(93, 91, 99);;">Criador de jogos</button>
-                    <button class="btn btn-secondary w-75 my-2 corTerciaria" style="border-color: rgb(93, 91, 99);;">Administrador</button>
-                    <a href="/" class="btn btn-secondary w-75 my-2 corTerciaria" style="border-color: rgb(93, 91, 99);;">Sair</a>
-                </div>
-                <div class="col-9 p-2 corTerciaria" style="border: 1px solid black;">
+                <div class="col-md-3 p-2 corTerciaria border border-dark d-flex flex-column align-items-center">
+                    <a th:href="@{/AtualizarConta}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar conta</a>
+                    <a class="btn btn-secondary w-100 my-2 corTerciaria border-dark" style="color: white">Meu carrinho</a>
+                    <a th:href="@{/CriadorJogos}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Criador de jogos</a>
                     
+                    <div th:if="${erroAcesso}" class="corTerciaria text-center text-danger my-2">
+                        <p th:text="${erroAcesso}"></p>
+                    </div>
+                    
+                    <button class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar jogo</button>
+                    <a th:href="@{/Administrador}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Administrador</a>
+                    <a th:href="@{/}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Sair</a>
+                </div>
+
+                <div class="col-md-9 p-2 corTerciaria border border-dark">
+                    <img src="/images/LOGO.png" alt="logo" class="img-fluid" style="max-width: 80%;">
+                    <div class="mt-auto text-center text-white w-100">
+                        <p class="mb-1">Conta:</p>
+                        <span class="btn btn-secondary w-25 corTerciaria border-dark font-weight-bold" th:text="${nome}" disabled></span>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- FAZER FILTRO NA TABELA -->
-
-        <script>
-
-        </script>
     </body>
 </html>
