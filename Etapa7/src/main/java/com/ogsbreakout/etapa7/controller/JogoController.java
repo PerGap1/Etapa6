@@ -7,7 +7,6 @@ import com.ogsbreakout.etapa7.service.JogoService;
 import com.ogsbreakout.etapa7.service.UsuarioJogoService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -76,7 +75,7 @@ public class JogoController {
     public String criarjogo(@Valid @ModelAttribute Jogo jogoNovo, Model model, BindingResult result, HttpSession session){
         if (!result.hasErrors()){
             if (!jogoRepository.existsByTitulo(jogoNovo.getTitulo())){
-                jogoRepository.save(jogoNovo);
+                jogoService.criarJogo(jogoNovo);
                 
                 Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
                 usuarioJogoService.comprar(usuario, jogoNovo);
@@ -111,7 +110,7 @@ public class JogoController {
         
         if (!result.hasErrors()){
             if (!jogoRepository.existsByTitulo(jogoNovo.getTitulo())){
-                jogoRepository.save(jogoNovo);
+                jogoService.criarJogo(jogoNovo);
 
                 usuarioJogoService.comprar(usuario, jogoNovo);
                 

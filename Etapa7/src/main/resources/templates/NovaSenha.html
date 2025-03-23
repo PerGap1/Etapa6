@@ -18,42 +18,22 @@
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
                     <h1 class="titulo title">Nova senha</h1>
                 </header>
-                <form style="text-align: left;">
+                <form action="/NovaSenha" style="text-align: left;">
                     <div class="mb-3">
-                        <label for="email" class="form-label text-white">Insira uma nova senha:</label>
-                        <input type="text" id="password" class="form-control">
+                        <label for="senha" class="form-label text-white">Insira uma nova senha:</label>
+                        <input type="text" id="senha" name="senha" class="form-control" th:value="${senha}">
                     </div>
 
                     <div class="row my-4">
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/RecuperarConta" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
+                            <a href="/Login" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
                         </div>
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/Catalogo" type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" 
-                               style="border-color: blueviolet;" onclick="return validarFormulario(event);">Confirmar</a>
+                            <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" style="border-color: blueviolet;">Confirmar</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-        
-        <script>
-            function validarFormulario(event) {
-                var password = document.getElementById('password').value;
-
-                if (password !== "") {
-                    return true;
-                }
-
-                else{
-                    alert("Por favor, insira a senha");
-                }
-                
-                event.preventDefault();
-                return false;
-            }
-
-            document.querySelector('form').addEventListener('submit', validarFormulario);
-        </script>
     </body>
 </html>

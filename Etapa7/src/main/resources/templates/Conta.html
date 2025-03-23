@@ -30,15 +30,14 @@
                 <div class="col-md-3 p-2 corTerciaria border border-dark d-flex flex-column align-items-center">
                     <a th:href="@{/AtualizarConta}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar conta</a>
                     <a class="btn btn-secondary w-100 my-2 corTerciaria border-dark" style="color: white">Meu carrinho</a>
-                    <a th:href="@{/CriadorJogos}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Criador de jogos</a>
+                    <a th:href="@{/CriadorJogos}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Criador de jogos</a>                    
+                    <button class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar jogo</button>
+                    <a th:href="@{/Administrador}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Administrador</a>
+                    <a th:href="@{/}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Sair</a>
                     
                     <div th:if="${erroAcesso}" class="corTerciaria text-center text-danger my-2">
                         <p th:text="${erroAcesso}"></p>
                     </div>
-                    
-                    <button class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar jogo</button>
-                    <a th:href="@{/Administrador}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Administrador</a>
-                    <a th:href="@{/}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Sair</a>
                 </div>
 
                 <div class="col-md-9 p-2 corTerciaria border border-dark">

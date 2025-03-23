@@ -128,4 +128,24 @@ public class UsuarioController {
         
         return "AtualizarConta"; 
     }
+    
+    @PostMapping("/Promover")
+    public String promover(@RequestParam Integer id, Model model, HttpSession session) {
+        Usuario acesso = (Usuario) session.getAttribute("usuarioLogado");
+        if (acesso == null || !acesso.getAcesso().equals("admin")) {
+            return "redirect:/Login"; 
+        }
+
+        Usuario usuario = usuarioService.buscarUsuarioPorId(id);
+
+        if (usuario.getAcesso().equals("admin")) {
+            model.addAttribute("erroAcesso", "Você não pode mudar o acesso de um administrador");
+        } else {
+            String novoAcesso = usuario.getAcesso().equals("dev") ? "user" : "dev";
+            usuario.setAcesso(novoAcesso);
+            usuarioService.atualizarUsuario(id, usuario);
+        }
+
+        return "Administrador";
+    }
 }

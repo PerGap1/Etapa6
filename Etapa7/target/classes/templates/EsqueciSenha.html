@@ -18,10 +18,15 @@
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
                     <h1 class="titulo title">Recuperar conta</h1>
                 </header>
-                <form style="text-align: left;">
+                
+                <div th:if="${erroEmail}" class="corSecundaria text-center text-danger my-2">
+                    <p th:text="${erroEmail}"></p>
+                </div>
+                
+                <form action="/BuscarEmail" method="POST" style="text-align: left;">
                     <div class="mb-3">
                         <label for="email" class="form-label text-white">Enviar código para:</label>
-                        <input type="text" id="email" class="form-control" placeholder="Email">
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Email">
                     </div>
 
                     <div class="row my-4">
@@ -29,7 +34,7 @@
                             <a href="/Login" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
                         </div>
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/RecuperarConta" type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" style="border-color: blueviolet;">Enviar</a>
+                            <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" style="border-color: blueviolet;">Enviar</button>
                         </div>
                     </div>
                 </form>

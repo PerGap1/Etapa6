@@ -18,10 +18,25 @@
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
                     <h1 class="titulo title">Recuperar conta</h1>
                 </header>
-                <form style="text-align: left;">
+                
+                <div th:if="${erroCodigo}" class="corSecundaria text-center text-danger my-2">
+                    <p th:text="${erroCodigo}"></p>
+                </div>
+                
+                <form action="/VerificarCodigo" method="POST" style="text-align: left;">
+                    <h6 class="text-center" style="color: white">Código gerado no terminal</h6>
+                    
+                    <div th:if="${erroEmail}" class="corSecundaria text-center text-danger my-2">
+                        <p th:text="${erroEmail}"></p>
+                    </div>
+
                     <div class="mb-3">
-                        <label for="email" class="form-label text-white">Código:</label>
-                        <input type="text" id="codigo" class="form-control" placeholder="X X X X X X">
+                        <label for="codigo" class="form-label text-white">Código:</label>
+                        <input type="text" id="codigo" name="codigo" class="form-control" placeholder="XXXXXX">
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="hidden" id="email" name="email" class="form-control" th:value="${email}">
                     </div>
 
                     <div class="row my-4">
@@ -29,7 +44,7 @@
                             <a href="/EsqueciSenha" type="button" class="btn btn-secondary w-50 ml-5">Voltar</a>
                         </div>
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a href="/NovaSenha" type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" style="border-color: blueviolet;">Confirmar</a>
+                            <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" style="border-color: blueviolet;">Confirmar</button>
                         </div>
                     </div>
                 </form>
