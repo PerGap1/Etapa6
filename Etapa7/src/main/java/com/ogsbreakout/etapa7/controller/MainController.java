@@ -1,6 +1,5 @@
 package com.ogsbreakout.etapa7.controller;
 
-import com.ogsbreakout.etapa7.model.Codigo;
 import com.ogsbreakout.etapa7.model.Jogo;
 import com.ogsbreakout.etapa7.model.ListaCodigo;
 import com.ogsbreakout.etapa7.model.Usuario;
@@ -96,6 +95,7 @@ public class MainController {
             return "EsqueciSenha";
         }
         
+        model.addAttribute("email", email);
         model.addAttribute("erroCodigo", "Código incorreto");
         return "RecuperarConta";
     }
@@ -203,12 +203,6 @@ public class MainController {
         return "Conta";
     }
     
-    //Nova senha
-    @GetMapping("/NovaSenha")
-    public String novaSenha(){
-        return "NovaSenha";
-    }
-    
     //Não implantado
     @GetMapping("/BarraNav")
     public String barraNav(){
@@ -284,7 +278,7 @@ public class MainController {
     //Administrador
     @GetMapping("/Administrador")
     public String administrador(@RequestParam(name = "filtro", required = false) String filtroUsuario, 
-    @RequestParam(name = "filtro", required = false) String filtroJogo, Model model, HttpSession session){
+    @RequestParam(name = "filtro", required = false) String filtroJogo, Model model, HttpSession session, @RequestParam(name = "erroAcesso", required = false) boolean erroAcesso){
         
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         if (usuario == null) {
@@ -315,6 +309,10 @@ public class MainController {
         else{
             jogos = jogoService.listarPorFiltro(filtroJogo);
             model.addAttribute("filtroJogo", filtroJogo);
+        }
+        
+        if (erroAcesso){
+            model.addAttribute("erroAcesso", "Você não pode mudar o acesso de um administrador");
         }
         
         model.addAttribute("listarJogos", jogos);

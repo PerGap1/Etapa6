@@ -37,13 +37,15 @@
             </form>
 
             <div class="p-2"></div>
+            <div th:if="${erroAcesso}" class="corSecundaria text-center text-danger my-2">
+                <p th:text="${erroAcesso}"></p>
+            </div>
 
             <table class="tabela table table-striped table-responsive-md h-100" style="background-color: white; min-height: 20vw;">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Senha</th>
                         <th>Email</th>
                         <th>Apelido</th>
                         <th>Idade</th>
@@ -58,7 +60,6 @@
                     <tr th:each="usuario : ${listarUsuarios}">
                         <td th:text="${usuario.id}"></td>
                         <td th:text="${usuario.nome}"></td>
-                        <td th:text="${usuario.senha}"></td>
                         <td th:text="${usuario.email}"></td>
                         <td th:text="${usuario.apelido}"></td>
                         <td th:text="${usuario.idade}"></td>
@@ -71,7 +72,15 @@
                             <a th:href="@{/Usuario/Deletar/{id}(id=${usuario.id})}" class="btn btn-primary" style="background-color: red; border: 1px solid red">Deletar</a>
                         </td>
                         <td>
-                            <a th:href="@{/Usuario/Promover(id=${usuario.id})}" method="POST" class="btn btn-primary" style="background-color: lime; border: 1px solid lime">Promover</a>
+                            <form th:action="@{/Usuario/Promover}" method="POST">
+                                <input type="hidden" name="id" th:value="${usuario.id}" />
+                                
+                                <input type="hidden" name="filtroUsuario" th:value="${filtroUsuario}" />
+                                <input type="hidden" name="filtroJogo" th:value="${filtroJogo}" />
+                                <input type="hidden" name="listarJogos" th:value="${listarJogos}" />
+                                <input type="hidden" name="listarUsuarios" th:value="${listarUsuarios}" />
+                                <button type="submit" class="btn btn-primary" style="background-color: lime; border: 1px solid lime">Promover</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>

@@ -25,6 +25,9 @@ public class UsuarioController {
     
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    MainController mainController;
 
     @GetMapping("/")
     public String viewHomePage() {
@@ -74,8 +77,6 @@ public class UsuarioController {
         return "NovaConta"; 
     }
     
-    //Cuidar para diferença entre atualizar usuário e criar usuário
-
     @GetMapping("/Deletar/{id}")
     public String deletarUsuario(@PathVariable(value = "id") Integer id, HttpSession session) {
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
@@ -130,7 +131,10 @@ public class UsuarioController {
     }
     
     @PostMapping("/Promover")
-    public String promover(@RequestParam Integer id, Model model, HttpSession session) {
+    public String promover(@RequestParam(name = "id") Integer id, @RequestParam(name = "filtroUsuario") String filtroUsuario, 
+    @RequestParam(name = "filtroJogo") String filtroJogo, Model model, HttpSession session) {
+        boolean erroAcesso = false;
+        
         Usuario acesso = (Usuario) session.getAttribute("usuarioLogado");
         if (acesso == null || !acesso.getAcesso().equals("admin")) {
             return "redirect:/Login"; 
@@ -139,13 +143,16 @@ public class UsuarioController {
         Usuario usuario = usuarioService.buscarUsuarioPorId(id);
 
         if (usuario.getAcesso().equals("admin")) {
-            model.addAttribute("erroAcesso", "Você não pode mudar o acesso de um administrador");
+            erroAcesso = true;
         } else {
             String novoAcesso = usuario.getAcesso().equals("dev") ? "user" : "dev";
             usuario.setAcesso(novoAcesso);
             usuarioService.atualizarUsuario(id, usuario);
         }
 
-        return "Administrador";
+        model.addAttribute("filtroUsuario", filtroUsuario);
+        model.addAttribute("filtroJogo", filtroJogo);
+
+        return mainController.administrador(filtroUsuario, filtroJogo, model, session, erroAcesso);
     }
 }

@@ -18,7 +18,7 @@
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
                     <h1 class="titulo title">Nova senha</h1>
                 </header>
-                <form action="/NovaSenha" style="text-align: left;">
+                <form action="/NovaSenha" method="POST" style="text-align: left;">
                     <div class="mb-3">
                         <label for="senha" class="form-label text-white">Insira uma nova senha:</label>
                         <input type="text" id="senha" name="senha" class="form-control" th:value="${senha}">

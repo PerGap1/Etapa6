@@ -17,13 +17,13 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Usuario") //ERRO EM POTENCIAL COM ID E ID_USUARIO    
+@Table(name = "Usuario")  
 public class Usuario {    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @NotNull(message = "Nome de usuário não informado")
+    @NotBlank(message = "Nome de usuário não informado")
     @Column(unique = true)
     private String nome;
     
