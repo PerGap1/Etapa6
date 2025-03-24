@@ -34,8 +34,9 @@
                 <div th:if="${erroIdade}" class="corSecundaria text-center" style="color: crimson">
                     <p th:text="${erroIdade}"></p>
                 </div>
-                <!-- /Usuario para post -->
+                
                 <form th:action="@{/Usuario/AtualizarConta}" method="POST" style="text-align: left; align-items: center; font-size: large;">
+                    <input type="hidden" id="senha" name="senha" class="form-control" th:value="${usuarioAntigo.senha}">
                     <div class="mb-3 my-4">
                         <div class="row">
                             <div class="col-3" style="padding-top: 0.5%;">
@@ -43,16 +44,6 @@
                             </div>
                             <div class="col-9">
                                 <input type="text" id="nome" name="nome" class="form-control" th:value="${usuarioNovo.nome}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-3 my-4">
-                        <div class="row">
-                            <div class="col-3" style="padding-top: 0.5%;">
-                                <label for="senha" class="form-label text-white">Senha:</label>
-                            </div>
-                            <div class="col-9">
-                                <input type="password" id="senha" name="senha" class="form-control" th:value="${usuarioNovo.senha}">
                             </div>
                         </div>
                     </div>

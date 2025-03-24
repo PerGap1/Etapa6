@@ -37,13 +37,15 @@
             </form>
 
             <div class="p-2"></div>
+            <div th:if="${erroAcesso}" class="corSecundaria text-center text-danger my-2">
+                <p th:text="${erroAcesso}"></p>
+            </div>
 
             <table class="tabela table table-striped table-responsive-md h-100" style="background-color: white; min-height: 20vw;">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Nome</th>
-                        <th>Senha</th>
                         <th>Email</th>
                         <th>Apelido</th>
                         <th>Idade</th>
@@ -51,23 +53,34 @@
                         <th>Acesso</th>
                         <th>Atualizar</th>
                         <th>Deletar</th>
+                        <th>Promoção</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="usuario : ${listarUsuarios}">
                         <td th:text="${usuario.id}"></td>
                         <td th:text="${usuario.nome}"></td>
-                        <td th:text="${usuario.senha}"></td>
                         <td th:text="${usuario.email}"></td>
                         <td th:text="${usuario.apelido}"></td>
                         <td th:text="${usuario.idade}"></td>
                         <td th:text="${#temporals.format(usuario.dataEntrada, 'dd/MM/yyyy')}"></td>
                         <td th:text="${usuario.acesso}"></td>
                         <td>
-                            <a th:href="@{/AtualizarConta/{id}(id=${usuario.id})}" class="btn btn-primary" style="background-color: blue">Atualizar</a>
+                            <a th:href="@{/AtualizarConta/{id}(id=${usuario.id})}" class="btn btn-primary" style="background-color: blue; border: 1px solid blue">Atualizar</a>
                         </td>
                         <td>
-                            <a th:href="@{/Usuario/Deletar/{id}(id=${usuario.id})}" class="btn btn-primary" style="background-color: red">Deletar</a>
+                            <a th:href="@{/Usuario/Deletar/{id}(id=${usuario.id})}" class="btn btn-primary" style="background-color: red; border: 1px solid red">Deletar</a>
+                        </td>
+                        <td>
+                            <form th:action="@{/Usuario/Promover}" method="POST">
+                                <input type="hidden" name="id" th:value="${usuario.id}" />
+                                
+                                <input type="hidden" name="filtroUsuario" th:value="${filtroUsuario}" />
+                                <input type="hidden" name="filtroJogo" th:value="${filtroJogo}" />
+                                <input type="hidden" name="listarJogos" th:value="${listarJogos}" />
+                                <input type="hidden" name="listarUsuarios" th:value="${listarUsuarios}" />
+                                <button type="submit" class="btn btn-primary" style="background-color: lime; border: 1px solid lime">Promover</button>
+                            </form>
                         </td>
                     </tr>
                 </tbody>
@@ -90,6 +103,7 @@
             <table class="tabela table table-striped table-responsive-md h-100 my-2" style="background-color: white; min-height: 20vw;">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Título</th>
                         <th>Categoria</th>
                         <th>Valor</th>
@@ -101,22 +115,21 @@
                 </thead>
                 <tbody>
                     <tr th:each="jogo : ${listarJogos}">
+                        <td th:text="${jogo.id}"></td>
                         <td th:text="${jogo.titulo}"></td>
                         <td th:text="${jogo.categoria}"></td>
                         <td th:text="'R$ ' + ${#numbers.formatDecimal(jogo.valor, 1, 2, 'COMMA')}"></td>
                         <td th:text="${#temporals.format(jogo.lancamento, 'dd/MM/yyyy')}"></td>
                         <td th:text="${jogo.criador}"></td>
                         <td>
-                            <a th:href="@{/AtualizarJogo/{id}(id=${jogo.id})}" class="btn btn-primary" style="background-color: blue">Atualizar</a>
+                            <a th:href="@{/AtualizarJogo/{id}(id=${jogo.id})}" class="btn btn-primary" style="background-color: blue; border: 1px solid blue">Atualizar</a>
                         </td>
                         <td>
-                            <a th:href="@{/Jogo/Deletar/{id}(id=${jogo.id})}" class="btn btn-primary" style="background-color: red">Deletar</a>
+                            <a th:href="@{/Jogo/Deletar/{id}(id=${jogo.id})}" class="btn btn-primary" style="background-color: red; border: 1px solid red">Deletar</a>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
-        <!-- FAZER FILTRO NA TABELA -->
     </body>
 </html>

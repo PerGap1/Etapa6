@@ -29,16 +29,18 @@
             <div class="row" style="min-height: 35vw;">
                 <div class="col-md-3 p-2 corTerciaria border border-dark d-flex flex-column align-items-center">
                     <a th:href="@{/AtualizarConta}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar conta</a>
-                    <a class="btn btn-secondary w-100 my-2 corTerciaria border-dark" style="color: white">Meu carrinho</a>
-                    <a th:href="@{/CriadorJogos}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Criador de jogos</a>
+                    <a th:href="@{/CriadorJogos}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Criador de jogos</a>                    
+                    <a th:href="@{/InformarIdJogo}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar jogo</a>
+                    <a th:href="@{/Administrador}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Administrador</a>
+                    <a th:href="@{/}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Sair</a>
                     
                     <div th:if="${erroAcesso}" class="corTerciaria text-center text-danger my-2">
                         <p th:text="${erroAcesso}"></p>
                     </div>
                     
-                    <button class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Atualizar jogo</button>
-                    <a th:href="@{/Administrador}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Administrador</a>
-                    <a th:href="@{/}" class="btn btn-secondary w-100 my-2 corTerciaria border-dark">Sair</a>
+                    <div th:if="${sucessoOperacao}" class="corTerciaria text-center my-2" style="color: rgb(12,219, 18)">
+                        <p th:text="${sucessoOperacao}"></p>
+                    </div>
                 </div>
 
                 <div class="col-md-9 p-2 corTerciaria border border-dark">

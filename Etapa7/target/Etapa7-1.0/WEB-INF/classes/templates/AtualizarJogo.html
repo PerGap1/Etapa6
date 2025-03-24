@@ -19,18 +19,20 @@
                     <h1 class="titulo title">Atualizar jogos</h1>
                 </header>
                 
-                <div th:if="${erroInvalidade}" class="corSecundaria text-center" style="color: crimson">
+                <div th:if="${erroInvalidade}" class="corTerciaria text-center" style="color: crimson">
                     <p th:text="${erroInvalidade}"></p>
                 </div>
                 
-                <form th:action="@{/Jogo/atualizarJogo}" method="POST" style="text-align: left; align-items: center; font-size: large;">
+                <form th:action="@{/Jogo/AtualizarJogo}" method="POST" style="text-align: left; align-items: center; font-size: large;">
+                    <input type="hidden" id="id" name="id" class="form-control" th:value="${jogoNovo.id}">
+                    
                     <div class="mb-3 my-4">
                         <div class="row">
                             <div class="col-3" style="padding-top: 0.5%;">
                                 <label for="titulo" class="form-label text-white">Título:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${jogo.titulo}">
+                                <input type="text" id="titulo" name="titulo" class="form-control" th:value="${jogoNovo.titulo}">
                             </div>
                         </div>
                     </div>
@@ -40,7 +42,7 @@
                                 <label for="categoria" class="form-label text-white">Categoria:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="categoria" name="categoria" class="form-control" th:value="${jogo.categoria}">
+                                <input type="text" id="categoria" name="categoria" class="form-control" th:value="${jogoNovo.categoria}">
                             </div>
                         </div>
                     </div>
@@ -50,7 +52,7 @@
                                 <label for="valor" class="form-label text-white">Valor:</label>
                             </div>
                             <div class="col-9">
-                                <input type="number" id="valor" name="valor" class="form-control" th:value="${jogo.valor}">
+                                <input type="number" id="valor" name="valor" class="form-control" th:value="${jogoNovo.valor}">
                             </div>
                         </div>
                     </div>
@@ -60,7 +62,7 @@
                                 <label for="lancamento" class="form-label text-white">Lançamento:</label>
                             </div>
                             <div class="col-9">
-                                <input type="datetime-local" id="lancamento" name="lancamento" class="form-control" th:value="${jogo.lancamento}">
+                                <input type="datetime-local" id="lancamento" name="lancamento" class="form-control" th:value="${jogoNovo.lancamento}">
                             </div>
                         </div>
                     </div>
@@ -70,7 +72,7 @@
                                 <label for="criador" class="form-label text-white">Criador:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="criador" name="criador" class="form-control" th:value="${jogo.criador}">
+                                <input type="text" id="criador" name="criador" class="form-control" th:value="${jogoNovo.criador}">
                             </div>
                         </div>
                     </div>
@@ -80,7 +82,7 @@
                                 <label for="descricao" class="form-label text-white">Descrição:</label>
                             </div>
                             <div class="col-9">
-                                <input type="text" id="descricao" name="descricao" class="form-control" th:value="${jogo.descricao}">
+                                <input type="text" id="descricao" name="descricao" class="form-control" th:value="${jogoNovo.descricao}">
                             </div>
                         </div>
                     </div>
@@ -90,7 +92,7 @@
                                 <label for="classificacao" class="form-label text-white">Classificação:</label>
                             </div>
                             <div class="col-9">
-                                <input type="number" id="classificacao" name="classificacao" class="form-control" th:value="${jogo.classificacao}">
+                                <input type="number" id="classificacao" name="classificacao" class="form-control" th:value="${jogoNovo.classificacao}">
                             </div>
                         </div>
                     </div>
