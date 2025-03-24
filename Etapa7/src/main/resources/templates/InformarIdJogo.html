@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Nova senha</title>
+        <title>Informe id</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
         crossorigin="anonymous">
@@ -16,17 +16,22 @@
         <div class="container centralizado d-flex vh-100">
             <div class="login-box w-75 shadow-lg p-4 tabua">
                 <header class="row text-light h-20 centralizado" style="text-align: center;">
-                    <h1 class="titulo title">Nova senha</h1>
+                    <h1 class="titulo title">Informe id</h1>
                 </header>
-                <form action="/NovaSenha" method="POST" style="text-align: left;">
+                
+                <div th:if="${erroId}" class="corSecundaria text-center text-danger my-2">
+                    <p th:text="${erroId}"></p>
+                </div>
+                
+                <form th:action="@{/AtualizarJogo/{id}}" method="GET" style="text-align: left;">
                     <div class="mb-3">
-                        <label for="senha" class="form-label text-white">Insira uma nova senha:</label>
-                        <input type="text" id="senha" name="senha" class="form-control" th:value="${senha}">
+                        <label for="id" class="form-label text-white">Insira o id do jogo:</label>
+                        <input type="number" id="id" name="id" class="form-control" th:value="${id}">
                     </div>
 
                     <div class="row my-4">
                         <div class="col-3 col-md-6 centralizado d-flex">
-                            <a th:href="@{/Login}" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
+                            <a th:href="@{/Conta}" type="button" class="btn btn-secondary w-50 ml-5">Cancelar</a>
                         </div>
                         <div class="col-3 col-md-6 centralizado d-flex">
                             <button type="submit" class="btn btn-primary w-50 mr-5 corPrimaria" style="border-color: blueviolet;">Confirmar</button>

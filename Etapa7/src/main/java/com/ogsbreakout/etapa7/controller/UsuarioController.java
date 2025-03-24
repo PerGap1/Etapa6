@@ -120,6 +120,7 @@ public class UsuarioController {
         } 
         else {
             usuarioService.atualizarUsuario(usuarioAntigo.getId(), usuarioNovo);
+            model.addAttribute("sucessoOperacao", "Conta atualizada!");
             
             return "Conta";
         }

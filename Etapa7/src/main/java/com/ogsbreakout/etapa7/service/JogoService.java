@@ -27,12 +27,14 @@ public class JogoService {
     //Preenche a tabela com "não possui"
     public Jogo criarJogo(Jogo jogo) {
         List<Usuario> usuarios = usuarioRepository.findAll();
+
+        jogoRepository.save(jogo);
             
         for(Usuario usuario : usuarios){
             usuarioJogoService.perder(usuario, jogo);
         }
         
-        return jogoRepository.save(jogo);
+        return jogo;
     }
 
     //Processa para garantir o preenchimento correto das posses

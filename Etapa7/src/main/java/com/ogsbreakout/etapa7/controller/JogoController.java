@@ -76,11 +76,12 @@ public class JogoController {
         if (!result.hasErrors()){
             if (!jogoRepository.existsByTitulo(jogoNovo.getTitulo())){
                 jogoService.criarJogo(jogoNovo);
-                
+
                 Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
                 usuarioJogoService.comprar(usuario, jogoNovo);
                 
-                return "redirect:/Catalogo";
+                model.addAttribute("sucessoOperacao", "Jogo criado!");
+                return "/Conta";
             }
             else{
                 model.addAttribute("erroTitulo", "Jogo já cadastrado");
@@ -89,7 +90,7 @@ public class JogoController {
         else{
             model.addAttribute("erroInvalidade", "Preencha corretamente os campos");
         }
-        
+
         model.addAttribute("titulo", jogoNovo.getTitulo());
         model.addAttribute("categoria", jogoNovo.getCategoria());
         model.addAttribute("valor", jogoNovo.getValor());
@@ -108,31 +109,25 @@ public class JogoController {
             return "redirect:/Login"; 
         }
         
-        if (!result.hasErrors()){
-            if (!jogoRepository.existsByTitulo(jogoNovo.getTitulo())){
-                jogoService.criarJogo(jogoNovo);
-
-                usuarioJogoService.comprar(usuario, jogoNovo);
-                
-                return "redirect:/Conta";
-            }
-            else{
-                model.addAttribute("erroTitulo", "Jogo já cadastrado");
-            }
-        }
-        else{
+        if (result.hasErrors()){
             model.addAttribute("erroInvalidade", "Preencha corretamente os campos");
         }
-        
-        model.addAttribute("titulo", jogoNovo.getTitulo());
-        model.addAttribute("categoria", jogoNovo.getCategoria());
-        model.addAttribute("valor", jogoNovo.getValor());
-        model.addAttribute("lancamento", jogoNovo.getLancamento());
-        model.addAttribute("criador", jogoNovo.getCriador());
-        model.addAttribute("descricao", jogoNovo.getDescricao());
-        model.addAttribute("classificacao", jogoNovo.getClassificacao());
 
-        return "CriadorJogos";  
+        Jogo jogoAntigo = jogoService.buscarJogoPorId(jogoNovo.getId());
+
+        if (jogoRepository.existsByTitulo(jogoNovo.getTitulo()) && !jogoNovo.getTitulo().equals(jogoAntigo.getTitulo())){
+            model.addAttribute("erroTitulo", "Esse título está indisponível");
+        }
+        else{
+            jogoService.atualizarJogo(jogoNovo.getId(), jogoNovo);
+
+            model.addAttribute("sucessoOperacao", "Jogo atualizado!");
+            return "Conta";
+        }
+        
+        model.addAttribute(jogoNovo);
+
+        return "AtualizarJogo";  
     }
     
     @GetMapping("/Deletar/{id}")

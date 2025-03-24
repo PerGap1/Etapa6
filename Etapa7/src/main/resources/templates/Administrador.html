@@ -103,6 +103,7 @@
             <table class="tabela table table-striped table-responsive-md h-100 my-2" style="background-color: white; min-height: 20vw;">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Título</th>
                         <th>Categoria</th>
                         <th>Valor</th>
@@ -114,6 +115,7 @@
                 </thead>
                 <tbody>
                     <tr th:each="jogo : ${listarJogos}">
+                        <td th:text="${jogo.id}"></td>
                         <td th:text="${jogo.titulo}"></td>
                         <td th:text="${jogo.categoria}"></td>
                         <td th:text="'R$ ' + ${#numbers.formatDecimal(jogo.valor, 1, 2, 'COMMA')}"></td>
@@ -129,7 +131,5 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- FAZER FILTRO NA TABELA -->
     </body>
 </html>

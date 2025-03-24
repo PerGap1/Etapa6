@@ -229,6 +229,7 @@ public class MainController {
     //Atualizar conta
     @GetMapping("/AtualizarConta")
     public String atualizarConta(Model model, HttpSession session){
+        //Atualizar
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         if (usuario == null) {
             return "redirect:/Login"; 
@@ -241,6 +242,7 @@ public class MainController {
     
     @GetMapping("/AtualizarConta/{id}")
     public String atualizarConta(Model model, HttpSession session, @PathVariable(value = "id") Integer id){
+        //Admin
         Usuario acesso = (Usuario) session.getAttribute("usuarioLogado");
         if (acesso == null) {
             return "redirect:/Login"; 
@@ -255,23 +257,35 @@ public class MainController {
         model.addAttribute("usuarioNovo", usuario);
         return "AtualizarConta";
     }
-
+    
     //Atualizar jogo
+    @GetMapping("/AtualizarJogo")
+    public String atualizarJogo(Model model, HttpSession session){
+        //Atualizar
+        System.out.println("here");
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        if (usuario == null) {
+            return "redirect:/Login"; 
+        }
+        
+        return "InformarIdJogo";
+    }
+    
     @GetMapping("/AtualizarJogo/{id}")
-    public String atualizarJogo(Model model, HttpSession session, @PathVariable(value = "id") Integer id){
+    public String atualizarJogo(Model model, HttpSession session, @PathVariable(value = "id", name = "id") Integer id){
+        //Admin
         Usuario acesso = (Usuario) session.getAttribute("usuarioLogado");
         if (acesso == null) {
             return "redirect:/Login"; 
         }
-        if (acesso.getAcesso().equals("user")){
-            model.addAttribute("erroAcesso", "Você não tem acesso a essa função");
-            return "Conta";
+        if (!acesso.getAcesso().equals("admin")){
+            return "redirect:/";
         }
         
         Jogo jogo = jogoService.buscarJogoPorId(id);
         
-        model.addAttribute("jogo", jogo);
-
+        model.addAttribute("jogoAntigo", jogo);
+        model.addAttribute("jogoNovo", jogo);
         return "AtualizarJogo";
     }
     
@@ -279,7 +293,7 @@ public class MainController {
     @GetMapping("/Administrador")
     public String administrador(@RequestParam(name = "filtro", required = false) String filtroUsuario, 
     @RequestParam(name = "filtro", required = false) String filtroJogo, Model model, HttpSession session, @RequestParam(name = "erroAcesso", required = false) boolean erroAcesso){
-        
+
         Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
         if (usuario == null) {
             return "redirect:/Login"; 
@@ -319,5 +333,20 @@ public class MainController {
         model.addAttribute("listarUsuarios", usuarios);
         
         return "Administrador";
+    }
+    
+    @GetMapping("/InformarIdJogo")
+    public String informarIdJogo(HttpSession session, Model model){
+        Usuario usuario = (Usuario) session.getAttribute("usuarioLogado");
+        if (usuario == null) {
+            return "redirect:/Login"; 
+        }
+        
+        if (usuario.getAcesso().equals("user")){
+            model.addAttribute("erroAcesso", "Você não tem acesso a essa função");
+            return "Conta";
+        }
+        
+        return "InformarIdJogo";
     }
 }
